@@ -14,7 +14,7 @@ __Jekyll Auto-S3__ is a simple [Jekyll](http://jekyllrb.com/) [plugin](http://je
 3) Add the following lines to your `_config.yml`:
 
 	s3:
-		bucket: YOURBUCKETNAME
+		bucket: s3://your-bucket-name
 
 ## Usage
 
