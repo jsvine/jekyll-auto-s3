@@ -15,6 +15,16 @@ end
 Crochet::Hook.new(Jekyll::Site) do
 	# After every time Jekyll calls `site.process`, run this...
 	after :process do
+		# Make sure necessary configs are in place.
+		if not config["s3"]
+			STDERR.write "\nWarning: `s3` config required for auto-s3.\n"
+			next
+		end
+		if not config["s3"]["bucket"]
+			STDERR.write "\nWarning: No S3 bucket specified for auto-s3.\n"
+			next
+		end
+
 		# Compose s3 options from defaults + _config.yml
 		s3 = AutoS3::DEFAULTS.merge(config["s3"])
 		command = "s3cmd sync #{s3["flags"].join(" ") } #{config["destination"]}/ #{s3["bucket"]}"
