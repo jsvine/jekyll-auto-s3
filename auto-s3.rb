@@ -15,6 +15,9 @@ end
 Crochet::Hook.new(Jekyll::Site) do
 	# After every time Jekyll calls `site.process`, run this...
 	after :process do
+		# Do nothing if we're previewing drafts
+		next if config["show_drafts"]
+
 		# Make sure necessary configs are in place.
 		if not config["s3"]
 			STDERR.write "\nWarning: `s3` config required for auto-s3.\n"
